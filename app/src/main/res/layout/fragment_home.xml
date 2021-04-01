@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/hdpi"
+        android:scaleType="fitXY"
+        android:alpha="0.7"/>
+
+    <ImageView
+        android:id="@+id/location_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat = "@drawable/ic_baseline_location_on_24"
+        />
+    <TextView
+        android:id="@+id/text_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppinsl"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location_icon"
+        app:layout_constraintHeight_percent="0.15"/>
+    <TextView
+        android:id="@+id/app_in_action"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_home"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppinsl"/>
+    <TextView
+        android:id="@+id/time_left"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_in_action"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppinsl"/>
+
+
+    <LinearLayout
+        android:id="@+id/button_img"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_left"
+        app:layout_constraintWidth_percent="0.5"
+        android:layout_marginTop="5dp"
+        android:weightSum="6">
+
+        <ImageButton
+            android:id="@+id/start_driving"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_red"
+            app:srcCompat="@drawable/ic_baseline_directions_bike_24"
+            android:layout_weight="2"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="2"/>
+        <ImageButton
+            android:id="@+id/stop_driving"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_green"
+            app:srcCompat="@drawable/ic_baseline_home_work_24"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/view_linear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/button_img"
+        app:layout_constraintTop_toBottomOf="@id/button_img"
+        android:paddingTop="2dp"
+        app:layout_constraintWidth_percent="0.5"
+        android:weightSum="6">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:text="@string/start_driving"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/white"
+
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins"
+
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:text="@string/stop_driving"
+
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/view_linear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_percent="0.35"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        android:weightSum="9">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/white_border"
+            android:weightSum="4">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppinsl"
+            android:textSize = "16sp"
+            android:layout_weight="2.1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:text="@string/time_left"/>
+
+            <EditText
+                android:id="@+id/hours"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.925"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:fontFamily="@font/poppinsl"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="number"
+                android:hint="@string/hours"/>
+
+            <EditText
+                android:id="@+id/mins"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.925"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:fontFamily="@font/poppinsl"
+                android:textColor="@color/white"
+                android:inputType="number"
+                android:textColorHint="@color/white"
+                android:hint="@string/minutes"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:textAlignment="center"
+            android:background="@drawable/white_border"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/view_trusted_contacts"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:background="@drawable/right_side_border"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/view_trusted"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat ="@drawable/ic_baseline_info_24"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_trusted_contacts"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:background="@drawable/right_side_border"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/add_trusted"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat ="@drawable/ic_baseline_info_24"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/white_border"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/settings"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:background="@drawable/right_side_border"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/settings"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat ="@drawable/ic_baseline_info_24"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/about_us"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="2dp"
+                android:gravity="center"
+                android:background="@drawable/right_side_border"
+                android:layout_gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/about_us"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat ="@drawable/ic_baseline_info_24"
+                    />
+
+            </LinearLayout>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/white_border"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:id="@+id/call_logs"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:paddingLeft="2dp"
+                android:layout_gravity="center"
+                android:background="@drawable/right_side_border"
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins"
+                    android:layout_gravity="center"
+                    android:text="@string/call_logs"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat ="@drawable/ic_baseline_info_24"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/time_display"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppinsl"/>
+
+
+        </LinearLayout>
+    
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
