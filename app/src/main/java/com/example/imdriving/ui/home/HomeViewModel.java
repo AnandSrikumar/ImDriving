@@ -39,7 +39,7 @@ public class HomeViewModel extends ViewModel{
     }
     public void setContext(Context context){
         this.context = context;
-        helper = new DBHelper(context, null, null, 1);
+        helper = new DBHelper(context, "App.db", null, 1);
         helper.addDefaultSms();
     }
     public LiveData<String> getText(){
@@ -128,5 +128,7 @@ public class HomeViewModel extends ViewModel{
     public List<String> getContactsList(){
         return helper.getTrustedContacts();
     }
+    public List<String> getAllTables(){return helper.getAllTableNames();}
+    public DBHelper getHelper(){return helper;}
 }
 

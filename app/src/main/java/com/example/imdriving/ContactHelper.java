@@ -23,7 +23,7 @@ public class ContactHelper {
 
             case (7):
                 if (resultCode == Activity.RESULT_OK) {
-                    DBHelper helper = new DBHelper(mContext, null, null, 1);
+                    DBHelper helper = new DBHelper(mContext, "App.db", null, 1);
                     Uri uri;
                     Cursor cursor1, cursor2;
                     String TempNumberHolder, TempContactID, IDresult = "" ;
@@ -55,15 +55,15 @@ public class ContactHelper {
                                 Log.d(TAG," selected number->"+TempNumberHolder);
                                 Log.d(TAG," selected number->"+name);
                                 if(!err) {
-                                    Toast.makeText(mContext, TempNumberHolder+" with name"+
-                                            name+" could not be added as trusted contact",
-                                            Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(mContext, TempNumberHolder+" with name"+
+//                                            name+" could not be added as trusted contact",
+//                                            Toast.LENGTH_LONG).show();
                                     Log.d(TAG," Could not be added as trusted contact");
                                 }
                                 else {
-                                    Toast.makeText(mContext, TempNumberHolder+" with name '"+
-                                                    name+"' Successfully added as trusted contact",
-                                            Toast.LENGTH_LONG).show();
+//                                    Toast.makeText(mContext, TempNumberHolder+" with name '"+
+//                                                    name+"' Successfully added as trusted contact",
+//                                            Toast.LENGTH_LONG).show();
                                     Log.d(TAG, "Successfully added as trusted contact");
                                 }
 

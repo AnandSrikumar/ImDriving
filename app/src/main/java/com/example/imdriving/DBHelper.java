@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "App.db";
+
     public static final String CONTACTS_TABLE_NAME = "contacts";
     public static final String SMS_BODY = "sms";
     SQLiteDatabase db;
@@ -26,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table "+SMS_BODY+"(sms varchar2(60))");
-        String query = "Create table "+CONTACTS_TABLE_NAME+"(contactNo text, name text)";
+        String query = "Create table "+CONTACTS_TABLE_NAME+"(contactNo varchar2(12) unique, name varchar2(25))";
         db.execSQL(query);
     }
 
@@ -44,6 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("sms",sms);
         long err = db.insert(SMS_BODY, null, values);
         Log.d(TAG,"In addDefault: "+err);
+        db.close();
         return err != -1;
     }
     public void updateSMS(String newSms){
@@ -54,6 +55,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor r = db.rawQuery("select * from "+SMS_BODY, null);
         r.moveToFirst();
         Log.d(TAG,"total SMS: "+r.getCount());
+        db.close();
         return r.getString(r.getColumnIndex("sms"));
     }
 
@@ -62,8 +64,9 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("contactNo", phoneNo);
         values.put("name", name );
-        long err = db.insertOrThrow(CONTACTS_TABLE_NAME, null, values);
+        long err = db.insert(CONTACTS_TABLE_NAME, null, values);
         Log.d(TAG, err+"....");
+        db.close();
         return err != -1;
     }
 
@@ -81,6 +84,23 @@ public class DBHelper extends SQLiteOpenHelper {
                     replaceAll(" ","").trim());
             r.moveToNext();
         }
+        db.close();
         return trusted;
+    }
+
+    public List<String> getAllTableNames(){
+        ArrayList<String> arrTblNames = new ArrayList<String>();
+
+        db = this.getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+
+        if (c.moveToFirst()) {
+            while ( !c.isAfterLast() ) {
+                arrTblNames.add( c.getString( c.getColumnIndex("name")) );
+                c.moveToNext();
+            }
+        }
+        db.close();
+        return arrTblNames;
     }
 }

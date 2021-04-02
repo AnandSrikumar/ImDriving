@@ -103,6 +103,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         if(id == R.id.view_trusted_contacts){
             Toast.makeText(mContext, homeViewModel.getContactsList()+"",
                     Toast.LENGTH_LONG).show();
+
         }
         if(view.getId() == R.id.add_trusted_contacts){
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
@@ -203,6 +204,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent resultIntent) {
         super.onActivityResult(requestCode , resultCode, resultIntent);
-        ContactHelper.pickAContact(requestCode, resultCode, resultIntent, this, mContext);
+        ContactHelper.pickAContact(requestCode, resultCode, resultIntent, this,
+                mContext);
     }
 }
