@@ -87,16 +87,10 @@ public class HomeViewModel extends ViewModel{
 
     public String strTimeRepr(int seconds){
         String time= "";
-        if(seconds < 3600){
-            return "00 hrs: "+((seconds/60)+1)+" mins";
-        }
-        else{
-            int h = seconds/3600;
-            int rm = seconds - h*2;
-            int m = (rm/60)+1;
-            time = h+" hrs :"+m+" mins";
-        }
-
+        int h = seconds/3600;
+        int m = seconds%3600;
+        m = m/60;
+        time = h+" hrs: "+m+" mins";
         return time;
     }
     public String getSmsBody(String ph, String location, String time){
