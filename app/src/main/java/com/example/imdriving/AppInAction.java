@@ -7,6 +7,8 @@ public class AppInAction {
     private int timeLeft = 120;
     private String addressLine = "";
     private static String phoneNumber="";
+    private static String dets[][];
+
     public void setIsDriving(boolean isDriving){
         this.isDriving = isDriving;
     }
@@ -46,5 +48,8 @@ public class AppInAction {
 
     public void setPhoneNumber(String phoneNumber){ this.phoneNumber = phoneNumber;}
     public String getPhoneNumber(){return phoneNumber;}
+
+    public void setDets(String[][] dets){this.dets = dets;}
+    public static String[][] getDets(){return dets;}
 
 }

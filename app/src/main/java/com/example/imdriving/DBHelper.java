@@ -16,6 +16,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String CONTACTS_TABLE_NAME = "contacts";
     public static final String SMS_BODY = "sms";
+    public static final String CONTACT_NO_COLUMN= "contactNo text";
+    public static final String CONTACT_NAME_COLUMN = "name text";
+
     SQLiteDatabase db;
     private String TAG="DPHelper";
 
@@ -26,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table "+SMS_BODY+"(sms varchar2(60))");
-        String query = "Create table "+CONTACTS_TABLE_NAME+"(contactNo varchar2(12) unique, name varchar2(25))";
+        String query = "create table "+CONTACTS_TABLE_NAME+"("+CONTACT_NO_COLUMN+", "+CONTACT_NAME_COLUMN+")";
         db.execSQL(query);
     }
 
@@ -76,8 +79,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor r = db.rawQuery("select * from "+CONTACTS_TABLE_NAME, null);
         r.moveToFirst();
         Log.d(TAG,"got records "+r.getCount());
-       /* Log.d("DB"," moved to first: "+
-                r.getString(r.getColumnIndex("contacts")));*/
         while(!r.isAfterLast()){
             Log.d(TAG," Inside while loop....");
             trusted.add(r.getString(r.getColumnIndex("contactNo")).
@@ -88,19 +89,60 @@ public class DBHelper extends SQLiteOpenHelper {
         return trusted;
     }
 
-    public List<String> getAllTableNames(){
-        ArrayList<String> arrTblNames = new ArrayList<String>();
+    public String[][] getNameAndContact(){
+        String[][] rows = new String[getColumCount()][2];
+        db = this.getReadableDatabase();
+        Cursor r = db.rawQuery("select * from "+CONTACTS_TABLE_NAME, null);
+        r.moveToFirst();
 
-        db = this.getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
-
-        if (c.moveToFirst()) {
-            while ( !c.isAfterLast() ) {
-                arrTblNames.add( c.getString( c.getColumnIndex("name")) );
-                c.moveToNext();
-            }
+        int i =0;
+        while(!r.isAfterLast()){
+            String c = r.getString(r.getColumnIndex("contactNo")).
+                    replaceAll(" ","").trim();
+            String nm = r.getString(r.getColumnIndex("name")).
+                    replaceAll(" ","").trim();
+            r.moveToNext();
+            if(i >= rows.length) continue;
+            rows[i][0] = c;
+            rows[i][1] = nm;
+            i++;
         }
+
         db.close();
-        return arrTblNames;
+        return rows;
     }
+
+    public int getColumCount(){
+        int c = 0;
+        db = this.getReadableDatabase();
+        Cursor r = db.rawQuery("select * from "+CONTACTS_TABLE_NAME, null);
+        c = r.getCount();
+        db.close();
+
+        return c;
+    }
+
+    public boolean deleteContact(String name){
+
+        Log.d(TAG, name+" is going to be deleted...");
+        return db.delete(CONTACTS_TABLE_NAME, "contactNo" + "='" + name+"'",
+                null) > 0;
+    }
+
+
+//    public List<String> getAllTableNames(){
+//        ArrayList<String> arrTblNames = new ArrayList<String>();
+//
+//        db = this.getWritableDatabase();
+//        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+//
+//        if (c.moveToFirst()) {
+//            while ( !c.isAfterLast() ) {
+//                arrTblNames.add( c.getString( c.getColumnIndex("name")) );
+//                c.moveToNext();
+//            }
+//        }
+//        db.close();
+//        return arrTblNames;
+//    }
 }

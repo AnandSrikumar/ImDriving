@@ -23,12 +23,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.imdriving.AppInAction;
 
 import com.example.imdriving.ContactHelper;
 
 import com.example.imdriving.R;
+import com.example.imdriving.RecyclerActivity;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
@@ -44,11 +48,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private EditText mins;
     private TextView timeDisplay;
     private Context mContext;
+    private FragmentActivity activityManager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         mContext = getContext().getApplicationContext();
+        activityManager = getActivity();
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         action = new AppInAction();
@@ -101,11 +107,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
         }
         if(id == R.id.view_trusted_contacts){
-            Toast.makeText(mContext, homeViewModel.getContactsList()+"",
-                    Toast.LENGTH_LONG).show();
-
+            Log.d(TAG, "view button clicked");
+            action.setDets(homeViewModel.getNameAndNumber());
+            Log.d(TAG, "Contact details set...");
+            Intent intent = new Intent(activityManager, RecyclerActivity.class);
+            startActivity(intent);
         }
-        if(view.getId() == R.id.add_trusted_contacts){
+        if(id == R.id.add_trusted_contacts){
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
             startActivityForResult(intent, 7);
         }
@@ -205,6 +213,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent resultIntent) {
         super.onActivityResult(requestCode , resultCode, resultIntent);
         ContactHelper.pickAContact(requestCode, resultCode, resultIntent, this,
-                mContext);
+                mContext, homeViewModel.getHelper());
     }
 }

@@ -90,7 +90,9 @@ public class HomeViewModel extends ViewModel{
         int h = seconds/3600;
         int m = seconds%3600;
         m = m/60;
-        time = h+" hrs: "+m+" mins";
+        int s = seconds - m*60;
+        s %= 60;
+        time = h+" hrs: "+m+" mins: "+s+" seconds";
         return time;
     }
     public String getSmsBody(String ph, String location, String time){
@@ -104,7 +106,7 @@ public class HomeViewModel extends ViewModel{
         Log.d(TAG,"SMS sending to Phone number: "+ph);
         Log.d(TAG, trusted+" are trusted");
         if(trusted.contains(ph)){
-            smsBody += "Im currently at "+location;
+            smsBody += ". Im currently at "+location;
             Log.d(TAG, "Present in trusted contacts");
         }
         smsBody += " .Approximately for "+time+" I will be driving..";
@@ -122,7 +124,10 @@ public class HomeViewModel extends ViewModel{
     public List<String> getContactsList(){
         return helper.getTrustedContacts();
     }
-    public List<String> getAllTables(){return helper.getAllTableNames();}
+
+    public String[][] getNameAndNumber(){return helper.getNameAndContact();}
+
     public DBHelper getHelper(){return helper;}
+
 }
 

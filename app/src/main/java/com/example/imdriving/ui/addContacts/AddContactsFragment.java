@@ -21,7 +21,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.imdriving.ContactHelper;
-import com.example.imdriving.DBHelper;
+
 import com.example.imdriving.R;
 
 public class AddContactsFragment extends Fragment {
@@ -62,7 +62,7 @@ public class AddContactsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent resultIntent) {
         super.onActivityResult(requestCode , resultCode, resultIntent);
         ContactHelper.pickAContact(requestCode, resultCode, resultIntent, this,
-                mContext);
+                mContext, addContactsViewModel.getHelper());
     }
 
 }

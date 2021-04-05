@@ -14,17 +14,16 @@
     <string name="stop_driving">Stop</string>
     <string name="time_left">Set timer for the app</string>
     <string name="hours">Hours</string>
-    <string name = "minutes">Minutes</string>
-    <string name ="view_trusted">View trusted contacts</string>
+    <string name="minutes">Minutes</string>
+    <string name="view_trusted">View trusted contacts</string>
     <string name="add_trusted">Add trusted contacts</string>
     <string name="add_contacts_notice">Notice: If you add a trusted contact, that contact will receive your current location along with sms.</string>
     <string name="settings">Settings</string>
-    <string name ="about_us">About us</string>
-    <string name = "call_logs">Call logs</string>
+    <string name="about_us">About us</string>
+    <string name="call_logs">Call logs</string>
     <string name="phone_no">Phone number</string>
     <string name="or">--or--</string>
     <string name="import_contact">Import contacts</string>
-
-
+    <string name ="delete">Delete</string>
 
 </resources>
