@@ -16,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String CONTACTS_TABLE_NAME = "contacts";
     public static final String SMS_BODY = "sms";
-    public static final String CONTACT_NO_COLUMN= "contactNo text";
+    public static final String CONTACT_NO_COLUMN= "contactNo text unique";
     public static final String CONTACT_NAME_COLUMN = "name text";
 
     SQLiteDatabase db;
@@ -64,6 +64,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean addContacts(String phoneNo, String name){
         db = this.getWritableDatabase();
+        phoneNo = phoneNo.trim();
+        phoneNo = phoneNo.replaceAll(" ","");
         ContentValues values = new ContentValues();
         values.put("contactNo", phoneNo);
         values.put("name", name );
@@ -97,10 +99,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         int i =0;
         while(!r.isAfterLast()){
-            String c = r.getString(r.getColumnIndex("contactNo")).
-                    replaceAll(" ","").trim();
-            String nm = r.getString(r.getColumnIndex("name")).
-                    replaceAll(" ","").trim();
+            String c = r.getString(r.getColumnIndex("contactNo"));
+            String nm = r.getString(r.getColumnIndex("name"));
             r.moveToNext();
             if(i >= rows.length) continue;
             rows[i][0] = c;
@@ -122,11 +122,19 @@ public class DBHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public boolean deleteContact(String name){
+    public boolean deleteContact(String ph){
 
-        Log.d(TAG, name+" is going to be deleted...");
-        return db.delete(CONTACTS_TABLE_NAME, "contactNo" + "='" + name+"'",
-                null) > 0;
+        Log.d(TAG, ph+" is going to be deleted...");
+        db = this.getWritableDatabase();
+        ph = ph.trim();
+        ph = ph.replaceAll(" ","");
+        String where = "contactNo" + "='" + ph+"'";
+        Log.d(TAG,"Deletion condition "+where);
+        long err = db.delete(CONTACTS_TABLE_NAME, "contactNo" + "='" + ph+"'",
+                null);
+        Log.d(TAG, "the error code for deletion-->"+err);
+        return err > 0;
+
     }
 
 

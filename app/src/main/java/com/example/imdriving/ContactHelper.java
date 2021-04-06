@@ -55,11 +55,14 @@ public class ContactHelper {
                                 Log.d(TAG," selected number->"+TempNumberHolder);
                                 Log.d(TAG," selected number->"+name);
                                 if(!err) {
-
+                                    /*Toast.makeText(mContext, "could not be added, " +
+                                                    "the contact might be already present...",
+                                            Toast.LENGTH_LONG).show();*/
                                     Log.d(TAG," Could not be added as trusted contact "+err);
                                 }
                                 else {
-
+                                    //Toast.makeText(mContext, "Successfully added...",
+                                     //       Toast.LENGTH_LONG).show();
                                     Log.d(TAG, "Successfully added as trusted contact");
                                 }
 

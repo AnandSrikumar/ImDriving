@@ -1,6 +1,7 @@
 package com.example.imdriving;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-
+    private final String TAG = "MyAdapter";
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView name, ph;
         Button bn;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
@@ -44,11 +46,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.ph.setText(dets[position][0]);
         holder.name.setText(dets[position][1]);
 
-        final String nm = dets[position][1];
+        final String nm = dets[position][0];
         holder.bn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeItem(holder.getAdapterPosition());
+                DBHelper helper = new DBHelper(mContext, "App.db",null, 1);
+                Log.d(TAG,"about to delete the item....");
+                helper.deleteContact(nm);
 
             }
         });
